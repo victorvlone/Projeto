@@ -60,7 +60,6 @@ int main () {
 
     printf("Como deseja prosseguir? ");
     ler_texto(respostaMENU, 100);
-    limpar_entrada();
     system("cls || clear");
 
     respostaMENU[0] = toupper(respostaMENU[0]);
@@ -127,42 +126,23 @@ int main () {
                     scanf("%d", &Aluno[i].AnodeNascimentoAluno);
 
                     while (Aluno[i].AnodeNascimentoAluno > 2017 || Aluno[i].AnodeNascimentoAluno < 2006){
-                        
+
                         system("cls || clear");
-                        printf("Não aceitamos alunos com menos de 7 anos ou com mais de 18.\n");
-                        sleep(2);
-                        system("cls || clear");
-                        printf("Deseja corrigir ou voltar ao menu?");
+                        limpar_entrada();
+                        printf("\nNão aceitamos alunos com menos de sete ou com mais de dezoito anos.\n");
+                        printf("Mesmo prosseguindo, o cadastro não será realizado.\n\n");
+                        printf("Deseja corrigir? ");
                         ler_texto(respostaMENU, 100);
+                        system("cls || clear");
 
                         respostaMENU[0] = toupper(respostaMENU[0]);
-                        if(strcmp("Voltar ao menu", respostaMENU) == 0){
+                        if(strcmp("Sim", respostaMENU) == 0){
 
-                            system("cls || clear");
-                            printf("         MENU\n\n");
-                            printf("  Listas | Cadastros\n\n");
-
-                            printf("Como deseja prosseguir? ");
-                            ler_texto(respostaMENU, 100);
-                            limpar_entrada();
-                            system("cls || clear");
-
-                            respostaMENU[0] = toupper(respostaMENU[0]);
-
-                            if (strcmp("Cadastros", respostaMENU) == 0){
-
-                                Aluno[i].AnodeNascimentoAluno = 2012;
-                                printf("1. Cadastrar Alunos\n");
-                                printf("2. Cadastrar professores\n");
-                                printf("3. Cadastrar disciplinas\n\n");
-                                printf("O que deseja cadastrar primeiro? ");
-                                scanf("%c", &resposta);
-                            }
-                        } else if(strcmp("Corrigir", respostaMENU) == 0){
-
-                            printf("ANO DE NASCIMENTO: ");
+                            printf("\nANO DE NASCIMENTO: ");
                             scanf("%d", &Aluno[i].AnodeNascimentoAluno);
 
+                        } else if(strcmp("Não", respostaMENU) == 0){
+                            break;
                         }
                     }
 
@@ -279,6 +259,9 @@ int main () {
             }
         }
     }
+
+    return 0;
+}
 
     return 0;
 }
