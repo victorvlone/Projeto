@@ -6,6 +6,23 @@
 #include <time.h>
 #define TAM 3
 
+void maiusculo(const char *string){
+    int i;
+    for(i = 0; string[i] != '\0'; i++){
+        string[i] = toupper(string[i]);
+    }
+}
+
+int letras(const char *string) {
+    int i;
+    for(i = 0; string[i] != '\0'; i++) {
+        if(!isalpha((unsigned char)string[i]) && string[i] != ' ') {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int Numeros(const char *string){
     int i;
     for(i = 0; string[i] != '\0'; i++){
@@ -14,6 +31,11 @@ int Numeros(const char *string){
         }
     }
     return 1;
+}
+
+int tamanho(const char *string){
+    int comprimento = strlen(string);
+    return comprimento;
 }
 
 void limpar_entrada() {
@@ -29,11 +51,9 @@ void ler_texto(char *buffer, int length) {
 struct Alunos{
     char NomeAluno[1000];
     char SexoAluno[10];
-    char CPFAluno[11];
-    int NumerodeMatricula;
-    int DiadeNascimentoAluno;
-    int MesdeNascimentoAluno;
-    int AnodeNascimentoAluno;
+    char CPFAluno[12];
+    char NumerodeMatricula[10];
+    char DatadeNascimentoAluno[9];
 };
 
 struct Professores{
@@ -54,7 +74,8 @@ struct Disciplinas{
 };
 
 int main () {
-
+    
+    setlocale(LC_ALL, "portuguese");
 
     char respostaMENU[100];
     char resposta;
@@ -65,7 +86,6 @@ int main () {
     struct Disciplinas Disciplina[TAM];
 
     system("cls || clear");
-    printf("         MENU\n\n");
     printf("  Listas | Cadastros\n\n");
 
     printf("Como deseja prosseguir? ");
@@ -94,12 +114,23 @@ int main () {
                     printf("NOME COMPLETO: ");
                     ler_texto(Aluno[i].NomeAluno, 1000);
                     limpar_entrada();
+                    
+                    while(!letras(Aluno[i].NomeAluno)){
+                        
+                        system("cls || clear");
+                        printf("Digite apenas letras e sem acentuação.\n");
+                        sleep(2);
+                        printf("NOME COMPLETO: ");
+                        ler_texto(Aluno[i].NomeAluno, 1000);
+                        
+                    }
+                    maiusculo(Aluno[i].NomeAluno);
 
                     printf("SEXO: ");
                     ler_texto(Aluno[i].SexoAluno, 10);
 
                     Aluno[i].SexoAluno[0] = toupper(Aluno[i].SexoAluno[0]);
-                    while(strcmp("Masculino", Aluno[i].SexoAluno) != 0 && strcmp("Feminino", Aluno[i].SexoAluno) != 0){
+                    while(strcmp("MASCULINO", Aluno[i].SexoAluno) != 0 && strcmp("FEMININO", Aluno[i].SexoAluno) != 0){
 
                         system("cls || clear");
                         printf("Opção invalida! Tente novamente:\n");
@@ -107,57 +138,46 @@ int main () {
                         system("cls || clear");
                     
                     }
+                    
+                    limpar_entrada();
+                    printf("DATA DE NASCIMENTO: ");
+                    ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
 
-                    printf("DIA DE NASCIMENTO: ");
-                    scanf("%d", &Aluno[i].DiadeNascimentoAluno);
-
-                    while (Aluno[i].DiadeNascimentoAluno > 31 || Aluno[i].DiadeNascimentoAluno < 1){
+                    while(tamanho(Aluno[i].DatadeNascimentoAluno) < 8){
                         
                         system("cls || clear");
-                        printf("invalido! Tente novamente:\n");
-                        scanf("%d", &Aluno[i].DiadeNascimentoAluno);
+                        printf("Digite oito números, sem espaços.\n");
+                        sleep(2);
                         system("cls || clear");
-
+                        printf("DATA DE NASCIMENTO: ");
+                        ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
+                        
                     }
                     
-                    printf("MẼS DE NASCIMENTO: ");
-                    scanf("%d", &Aluno[i].MesdeNascimentoAluno);
-
-                    while (Aluno[i].MesdeNascimentoAluno > 12 || Aluno[i].MesdeNascimentoAluno < 1){
+                    while(!Numeros(Aluno[i].DatadeNascimentoAluno)){
                         
                         system("cls || clear");
-                        printf("invalido! Tente novamente:\n");
-                        scanf("%d", &Aluno[i].MesdeNascimentoAluno);
+                        printf("Digite apenas números.\n");
+                        sleep(2);
                         system("cls || clear");
-
+                        printf("DATA DE NASCIMENTO: ");
+                        ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
                     }
-
-                    printf("ANO DE NASCIMENTO: ");
-                    scanf("%d", &Aluno[i].AnodeNascimentoAluno);
-
-                    while (Aluno[i].AnodeNascimentoAluno > 2017 || Aluno[i].AnodeNascimentoAluno < 2006){
-
-                        system("cls || clear");
-                        limpar_entrada();
-                        printf("\nNão aceitamos alunos com menos de sete ou com mais de dezoito anos.\n");
-                        printf("Mesmo prosseguindo, o cadastro não será realizado.\n\n");
-                        printf("Deseja corrigir? ");
-                        ler_texto(respostaMENU, 100);
-                        system("cls || clear");
-
-                        respostaMENU[0] = toupper(respostaMENU[0]);
-                        if(strcmp("Sim", respostaMENU) == 0){
-
-                            printf("\nANO DE NASCIMENTO: ");
-                            scanf("%d", &Aluno[i].AnodeNascimentoAluno);
-
-                        } else if(strcmp("Não", respostaMENU) == 0){
-                            break;
-                        }
-                    }
+                    
                     limpar_entrada();
                     printf("CPF: ");
-                    ler_texto(Aluno[i].CPFAluno, 11);
+                    ler_texto(Aluno[i].CPFAluno, 12);
+                    
+                    while(tamanho(Aluno[i].CPFAluno) < 11){
+                        
+                        system("cls || clear");
+                        printf("digite os onze números do seu CPF.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("CPF: ");
+                        ler_texto(Aluno[i].CPFAluno, 12);
+                        
+                    }
                     
                     while (!Numeros(Aluno[i].CPFAluno)){
                        
@@ -165,15 +185,36 @@ int main () {
                         printf("CPF invalido! Digite apenas números.\n");
                         sleep(2);
                         system("cls || clear");
+                        limpar_entrada();
                         printf("CPF: ");
-                        ler_texto(Aluno[i].CPFAluno, 11);
+                        ler_texto(Aluno[i].CPFAluno, 12);
                         
                     }
 
                     limpar_entrada();
                     printf("Número de matrícula: ");
-                    scanf("%d", &Aluno[i].NumerodeMatricula);
+                    ler_texto(Aluno[i].NumerodeMatricula, 10);
                     system("cls || clear");
+                    
+                    while(tamanho(Aluno[i].NumerodeMatricula) < 9){
+                        
+                        printf("O número de matrícula precisa ter nove digitos.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("Número de matrícula: ");
+                        ler_texto(Aluno[i].NumerodeMatricula, 10);
+                        
+                    }
+                    
+                    while(!Numeros(Aluno[i].NumerodeMatricula)){
+                        
+                        printf("Apenas números.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("Número de matrícula: ");
+                        ler_texto(Aluno[i].NumerodeMatricula, 10);
+                        
+                    }
                     i++;
 
                     if (i < TAM){
