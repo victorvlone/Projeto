@@ -6,6 +6,16 @@
 #include <time.h>
 #define TAM 3
 
+int Numeros(const char *string){
+    int i;
+    for(i = 0; string[i] != '\0'; i++){
+        if(!isdigit(string[i])){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void limpar_entrada() {
     char c;
     while ((c = getchar()) != '\n' && c != EOF) {}
@@ -19,7 +29,7 @@ void ler_texto(char *buffer, int length) {
 struct Alunos{
     char NomeAluno[1000];
     char SexoAluno[10];
-    int CPFAluno;
+    char CPFAluno[11];
     int NumerodeMatricula;
     int DiadeNascimentoAluno;
     int MesdeNascimentoAluno;
@@ -145,10 +155,22 @@ int main () {
                             break;
                         }
                     }
+                    limpar_entrada();
+                    printf("CPF: ");
+                    ler_texto(Aluno[i].CPFAluno, 11);
+                    
+                    while (!Numeros(Aluno[i].CPFAluno)){
+                       
+                        system("cls || clear");
+                        printf("CPF invalido! Digite apenas números.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("CPF: ");
+                        ler_texto(Aluno[i].CPFAluno, 11);
+                        
+                    }
 
-                    printf("CPF(sem pontuaçâo): ");
-                    scanf("%d", &Aluno[i].CPFAluno);
-
+                    limpar_entrada();
                     printf("Número de matrícula: ");
                     scanf("%d", &Aluno[i].NumerodeMatricula);
                     system("cls || clear");
@@ -156,6 +178,7 @@ int main () {
 
                     if (i < TAM){
 
+                        limpar_entrada();
                         printf("Aperte a tecla 1 para cadastrar mais um\n");
                         printf("aluno ou a tecla 2 para cadastrar um professor:\n");
                         scanf("%c", &resposta);
@@ -259,9 +282,6 @@ int main () {
             }
         }
     }
-
-    return 0;
-}
 
     return 0;
 }
