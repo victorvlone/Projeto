@@ -6,6 +6,7 @@
 #include <time.h>
 #define TAM 3
 
+//FUNÇÃO PARA VERIFICAR SE A DATA ESTA NO FORMATO CORRETO.
 int verificacaoData(const char *data) {
     for (int i = 0; i < 10; i++) {
         if ((i == 2 || i == 5) && data[i] != '/') {
@@ -17,6 +18,7 @@ int verificacaoData(const char *data) {
     return 1;
 }
 
+//FUNÇÃO PARA VERIFICAR SE O CPF ESTA NO FORMATO CORRETO.
 int verificacaoCPF(const char *cpf) {
     for (int i = 0; i < 14; i++) {
         if ((i == 3 || i == 7) && cpf[i] != '.') {
@@ -30,6 +32,7 @@ int verificacaoCPF(const char *cpf) {
     return 1;
 }
 
+//FUNÇÃO PARA VERIFICAR SE O NÚMERO DE MATRICULA ESTA NO FORMATO CORRETO.
 int verificacaoMatricula(const char *matricula) {
     for (int i = 0; i < 10; i++) {
         if (i == 3 && matricula[i] != '.') {
@@ -41,6 +44,7 @@ int verificacaoMatricula(const char *matricula) {
     return 1;
 }
 
+//FUNÇÃO PARA TORNAR TODAS AS LETRAS DA STRING EM MAIUSCULAS.
 void maiusculo(const char *string){
     int i;
     for(i = 0; string[i] != '\0'; i++){
@@ -48,6 +52,7 @@ void maiusculo(const char *string){
     }
 }
 
+//FUNÇAO PARA VERIFICAR SE TODOS OS CARACTERES DA STRING SÃO LETRAS.
 int letras(const char *string) {
     int i;
     for(i = 0; string[i] != '\0'; i++) {
@@ -71,19 +76,17 @@ void ler_texto(char *buffer, int length) {
 struct Alunos{
     char NomeAluno[1000];
     char SexoAluno[10];
-    char CPFAluno[12];
-    char NumerodeMatricula[10];
-    char DatadeNascimentoAluno[9];
+    char CPFAluno[15];
+    char NumerodeMatricula[11];
+    char DatadeNascimentoAluno[11];
 };
 
 struct Professores{
     char NomeProfessor[1000];
     char SexoProfessor[10];
-    int CPFProfessor;
-    int NumerodeMatricula;
-    int DiadeNascimentoProfessor;
-    int MesdeNascimentoProfessor;
-    int AnodeNascimentoProfessor;
+    char CPFProfessor[15];
+    char NumerodeMatricula[11]
+    char DatadeNascimentoProfessor[11];
 };
 
 struct Disciplinas{
@@ -112,9 +115,9 @@ int main () {
     ler_texto(respostaMENU, 100);
     system("cls || clear");
 
-    respostaMENU[0] = toupper(respostaMENU[0]);
+    maiusculo(respostaMENU);
 
-    if (strcmp("Cadastros", respostaMENU) == 0){
+            if (strcmp("CADASTROS", respostaMENU) == 0){
 
         printf("1. Cadastrar Alunos\n");
         printf("2. Cadastrar professores\n");
@@ -149,7 +152,7 @@ int main () {
                     printf("SEXO: ");
                     ler_texto(Aluno[i].SexoAluno, 10);
 
-                    Aluno[i].SexoAluno[0] = toupper(Aluno[i].SexoAluno[0]);
+                    maiusculo(Aluno[i].SexoAluno);
                     while(strcmp("MASCULINO", Aluno[i].SexoAluno) != 0 && strcmp("FEMININO", Aluno[i].SexoAluno) != 0){
 
                         system("cls || clear");
@@ -224,39 +227,67 @@ int main () {
                 do{
     
                     printf("CADASTRO DE PROFESSORES\n\n");
-
-                    printf("Nome completo: ");
-                    ler_texto(Professor[i].NomeProfessor, 1000);
-                    system("cls || clear");
-
-                    printf("CADASTRO DE PROFESSORES\n\n");
-
-                    printf("Sexo: ");
-                    ler_texto(Professor[i].SexoProfessor, 10);
-                    system("cls || clear");
-
-                    printf("CADASTRO DE PROFESSORES\n");
-
-                    printf("Data de nascimento\n\n");
-                    printf("Dia: ");
-                    scanf("%d", &Professor[i].DiadeNascimentoProfessor);
-                    printf("Mês: ");
-                    scanf("%d", &Professor[i].MesdeNascimentoProfessor);
-                    printf("Ano: ");
-                    scanf("%d", &Professor[i].AnodeNascimentoProfessor);
-                    system("cls || clear");
                     
-                    printf("CADASTRO DE PROFESSORES\n\n");
+                    limpar_entrada();
+                    printf("NOME COMPLETO: ");
+                    ler_texto(Professor[i].NomeProfessor, 1000);
+
+                    limpar_entrada();
+                    printf("SEXO: ");
+                    ler_texto(Professor[i].SexoProfessor, 10);
+
+                    maiusculo(Professor[i].SexoProfessor);
+                    while(strcmp("MASCULINO", Professor[i].SexoProfessor) != 0 && strcmp("FEMININO", Professor[i].SexoProfessor) != 0){
+
+                        system("cls || clear");
+                        printf("Opção invalida! Tente novamente:\n");
+                        ler_texto(Professor[i].SexoProfessor, 10);
+                        system("cls || clear");
+                    
+                    }
+
+                    limpar_entrada();
+                    printf("DATA DE NASCIMENTO: ");
+                    ler_texto(Professor[i].DatadeNascimentoProfessor, 11);
+                    
+                    while(!verificacaoData(Professor[i].DatadeNascimentoProfessor)){
+                        
+                        system("cls || clear");
+                        printf("Digite a data de nascimento no formato DD/MM/AAAA.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("DATA DE NASCIMENTO: ");
+                        ler_texto(Professor[i].DatadeNascimentoProfessor, 11);
+                        
+                    }
 
                     printf("CPF: ");
-                    scanf("%d", &Professor[i].CPFProfessor);
-                    system("cls || clear");
+                    ler_texto(Professor[i].CPFProfessor, 15);
+                    
+                    while (!verificacaoCPF(Professor[i].CPFProfessor)){
+                       
+                        system("cls || clear");
+                        printf("inválido! O CPF deve estar no formato 000.000.000-00.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        limpar_entrada();
+                        printf("CPF: ");
+                        ler_texto(Professor[i].CPFProfessor, 15);
+                        
+                    }
 
-                    printf("CADASTRO DE PROFESSORES\n\n");
-
-                    printf("Número de matrícula");
-                    scanf("%d", &Professor[i].NumerodeMatricula);
-                    system("cls || clear");
+                    printf("Número de matrícula: ");
+                    ler_texto(Professor[i].NumerodeMatricula, 11);
+                    
+                    while(!verificacaoMatricula(Professor[i].NumerodeMatricula)){
+                        
+                        printf("inválido! O número de matrícula deve estar no formato 000.000000.\n");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("Número de matrícula: ");
+                        ler_texto(Professor[i].NumerodeMatricula, 11);
+                        
+                    }
                     i++;
 
                     if (i < TAM){
@@ -302,9 +333,10 @@ int main () {
                 
             } else{
 
+                limpar_entrada();
                 printf("Opção invalida! aperte a tecla 1 se deseja adicionar\n");
-                printf("mais um aluno, 2 para adicionar mais um professor, 3\n");
-                printf("para adicionar mais uma disciplina ou 0 para encerrar:\n");
+                printf("um aluno, 2 para um professor, 3 para adicionar uma\n");
+                printf("disciplina ou 0 para encerrar: ");
                 scanf("%c", &resposta);
                 system("cls || clear");
                 
