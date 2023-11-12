@@ -161,50 +161,46 @@ int main () {
                     
                     limpar_entrada();
                     printf("DATA DE NASCIMENTO: ");
-                    ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
+                    ler_texto(Aluno[i].DatadeNascimentoAluno, 11);
                     
-                    while(!Numeros(Aluno[i].DatadeNascimentoAluno)){
+                    while(!verificacaoData(Aluno[i].DatadeNascimentoAluno)){
                         
                         system("cls || clear");
-                        printf("Digite apenas números.\n");
+                        printf("Digite a data de nascimento no formato DD/MM/AAAA.\n");
                         sleep(2);
                         system("cls || clear");
                         printf("DATA DE NASCIMENTO: ");
-                        ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
+                        ler_texto(Aluno[i].DatadeNascimentoAluno, 11);
                     }
                     
                     limpar_entrada();
                     printf("CPF: ");
-                    ler_texto(Aluno[i].CPFAluno, 12);
+                    ler_texto(Aluno[i].CPFAluno, 15);
                     
-                    
-                    
-                    while (!Numeros(Aluno[i].CPFAluno)){
+                    while (!verificacaoCPF(Aluno[i].CPFAluno)){
                        
                         system("cls || clear");
-                        printf("CPF invalido! Digite apenas números.\n");
+                        printf("inválido! O CPF deve estar no formato 000.000.000-00.\n");
                         sleep(2);
                         system("cls || clear");
                         limpar_entrada();
                         printf("CPF: ");
-                        ler_texto(Aluno[i].CPFAluno, 12);
+                        ler_texto(Aluno[i].CPFAluno, 15);
                         
                     }
 
                     limpar_entrada();
                     printf("Número de matrícula: ");
-                    ler_texto(Aluno[i].NumerodeMatricula, 10);
+                    ler_texto(Aluno[i].NumerodeMatricula, 11);
                     system("cls || clear");
                     
-                   
-                    
-                    while(!Numeros(Aluno[i].NumerodeMatricula)){
+                    while(!verificacaoMatricula(Aluno[i].NumerodeMatricula)){
                         
-                        printf("Apenas números.\n");
+                        printf("inválido! O número de matrícula deve estar no formato 000.000000.\n");
                         sleep(2);
                         system("cls || clear");
                         printf("Número de matrícula: ");
-                        ler_texto(Aluno[i].NumerodeMatricula, 10);
+                        ler_texto(Aluno[i].NumerodeMatricula, 11);
                         
                     }
                     i++;
