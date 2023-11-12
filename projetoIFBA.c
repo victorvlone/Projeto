@@ -6,6 +6,41 @@
 #include <time.h>
 #define TAM 3
 
+int verificacaoData(const char *data) {
+    for (int i = 0; i < 10; i++) {
+        if ((i == 2 || i == 5) && data[i] != '/') {
+            return 0;
+        } else if ((i != 2 && i != 5) && !isdigit(data[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int verificacaoCPF(const char *cpf) {
+    for (int i = 0; i < 14; i++) {
+        if ((i == 3 || i == 7) && cpf[i] != '.') {
+            return 0;
+        } else if (i == 11 && cpf[i] != '-'){
+            return 0;
+        } else if ((i != 2 && i != 5) && !isdigit(data[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int verificacaoMatricula(const char *matricula) {
+    for (int i = 0; i < 10; i++) {
+        if (i == 3 && matricula[i] != '.') {
+            return 0;
+        } else if (i != 3 && !isdigit(matricula[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void maiusculo(const char *string){
     int i;
     for(i = 0; string[i] != '\0'; i++){
@@ -21,21 +56,6 @@ int letras(const char *string) {
         }
     }
     return 1;
-}
-
-int Numeros(const char *string){
-    int i;
-    for(i = 0; string[i] != '\0'; i++){
-        if(!isdigit(string[i])){
-            return 0;
-        }
-    }
-    return 1;
-}
-
-int tamanho(const char *string){
-    int comprimento = strlen(string);
-    return comprimento;
 }
 
 void limpar_entrada() {
@@ -142,17 +162,6 @@ int main () {
                     limpar_entrada();
                     printf("DATA DE NASCIMENTO: ");
                     ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
-
-                    while(tamanho(Aluno[i].DatadeNascimentoAluno) < 8){
-                        
-                        system("cls || clear");
-                        printf("Digite oito números, sem espaços.\n");
-                        sleep(2);
-                        system("cls || clear");
-                        printf("DATA DE NASCIMENTO: ");
-                        ler_texto(Aluno[i].DatadeNascimentoAluno, 9);
-                        
-                    }
                     
                     while(!Numeros(Aluno[i].DatadeNascimentoAluno)){
                         
@@ -168,16 +177,7 @@ int main () {
                     printf("CPF: ");
                     ler_texto(Aluno[i].CPFAluno, 12);
                     
-                    while(tamanho(Aluno[i].CPFAluno) < 11){
-                        
-                        system("cls || clear");
-                        printf("digite os onze números do seu CPF.\n");
-                        sleep(2);
-                        system("cls || clear");
-                        printf("CPF: ");
-                        ler_texto(Aluno[i].CPFAluno, 12);
-                        
-                    }
+                    
                     
                     while (!Numeros(Aluno[i].CPFAluno)){
                        
@@ -196,15 +196,7 @@ int main () {
                     ler_texto(Aluno[i].NumerodeMatricula, 10);
                     system("cls || clear");
                     
-                    while(tamanho(Aluno[i].NumerodeMatricula) < 9){
-                        
-                        printf("O número de matrícula precisa ter nove digitos.\n");
-                        sleep(2);
-                        system("cls || clear");
-                        printf("Número de matrícula: ");
-                        ler_texto(Aluno[i].NumerodeMatricula, 10);
-                        
-                    }
+                   
                     
                     while(!Numeros(Aluno[i].NumerodeMatricula)){
                         
