@@ -6,27 +6,20 @@
 #include <time.h>
 #define TAM 3
 
-// FUNÇÃO PARA VERIFICAR SE A DATA ESTA NO FORMATO CORRETO.
-int verificacaoData(const char *data)
-{
+int verificacaoData(const char *data){
     int i;
-    for (i = 0; i < 10; i++)
-    {
-        if ((i == 2 || i == 5) && data[i] != '/')
-        {
+    for (i = 0; i < 10; i++){
+        if ((i == 2 || i == 5) && data[i] != '/'){
             return 0;
         }
-        else if ((i != 2 && i != 5) && !isdigit(data[i]))
-        {
+        else if ((i != 2 && i != 5) && !isdigit(data[i])){
             return 0;
         }
     }
     return 1;
 }
 
-// FUNÇÃO PARA VERIFICAR SE O CPF ESTA NO FORMATO CORRETO.
-int verificacaoCPF(const char *cpf)
-{
+int verificacaoCPF(const char *cpf){
     int i;
     for (i = 0; i < 14; i++){
         if ((i == 3 || i == 7) && cpf[i] != '.'){
@@ -42,64 +35,49 @@ int verificacaoCPF(const char *cpf)
     return 1;
 }
 
-// FUNÇÃO PARA VERIFICAR SE O NÚMERO DE MATRICULA ESTA NO FORMATO CORRETO.
-int verificacaoMatricula(const char *matricula)
-{
+
+int verificacaoMatricula(const char *matricula){
     int i;
-    for (i = 0; i < 10; i++)
-    {
-        if (i == 3 && matricula[i] != '.')
-        {
+    for (i = 0; i < 10; i++){
+        if (i == 3 && matricula[i] != '.'){
             return 0;
         }
-        else if (i != 3 && !isdigit(matricula[i]))
-        {
+        else if (i != 3 && !isdigit(matricula[i])){
             return 0;
         }
     }
     return 1;
 }
 
-// FUNÇÃO PARA TORNAR TODAS AS LETRAS DA STRING EM MAIUSCULAS.
-void maiusculo(char *string)
-{
+void maiusculo(char *string){
     int i;
-    for (i = 0; string[i] != '\0'; i++)
-    {
+    for (i = 0; string[i] != '\0'; i++){
         string[i] = toupper(string[i]);
     }
 }
 
-// FUNÇAO PARA VERIFICAR SE TODOS OS CARACTERES DA STRING SÃO LETRAS.
-int letras(const char *string)
-{
+int letras(const char *string){
     int i;
-    for (i = 0; string[i] != '\0'; i++)
-    {
-        if (!isalpha((unsigned char)string[i]) && string[i] != ' ')
-        {
+    for (i = 0; string[i] != '\0'; i++){
+        if (!isalpha((unsigned char)string[i]) && string[i] != ' '){
             return 0;
         }
     }
     return 1;
 }
 
-void limpar_entrada()
-{
+void limpar_entrada(){
     char c;
-    while ((c = getchar()) != '\n' && c != EOF)
-    {
+    while ((c = getchar()) != '\n' && c != EOF){
     }
 }
 
-void ler_texto(char *buffer, int length)
-{
+void ler_texto(char *buffer, int length){
     fgets(buffer, length, stdin);
     strtok(buffer, "\n");
 }
 
-struct Alunos
-{
+struct Alunos{
     char NomeAluno[1000];
     char SexoAluno[10];
     char CPFAluno[15];
@@ -117,8 +95,7 @@ struct Professores
     char NomedaDisciplina[1000];
 };
 
-struct Disciplinas
-{
+struct Disciplinas{
     char NomedaDisciplina[1000];
     int codigodaDisciplina;
     int Semestre;
