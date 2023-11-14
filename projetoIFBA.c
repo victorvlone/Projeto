@@ -395,7 +395,31 @@ int main(){
 
     while (strcmp("SAIR", respostaMENU) != 0){
 
-        if(strcmp("ALUNOS ORDENADOS POR ORDEM DE CADASTRO", respostaMENU) == 0 || strcmp("3", respostaMENU) == 0){
+        if(strcmp("ALUNOS ORDENADOS POR SEXO", respostaMENU) == 0 || strcmp("2", respostaMENU) == 0){
+
+            printf("LISTA DE ALUNOS POR SEXO\n\n");
+
+            printf("MASCULINO:\n\n");
+
+            for (i = 0; i < TAM; i++){
+
+                if (strcmp("MASCULINO", Aluno[i].SexoAluno) == 0){
+                    printf("%s\n", Aluno[i].NomeAluno);
+                }
+                
+            }
+
+            printf("FEMININO:\n\n");
+
+            for (i = 0; i < TAM; i++){
+
+                if (strcmp("FEMININO", Aluno[i].SexoAluno) == 0){
+                    printf("%s\n", Aluno[i].NomeAluno);
+                }
+                
+            }
+
+        } else if(strcmp("ALUNOS ORDENADOS POR ORDEM DE CADASTRO", respostaMENU) == 0 || strcmp("3", respostaMENU) == 0){
 
             printf("LISTA DE ALUNOS POR ORDEM DE CADASTRO\n\n");
 
