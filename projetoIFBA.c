@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#define TAM 3
+#define TAM 1
 
 int verificacaoData(const char *data){
     int i;
@@ -108,6 +108,7 @@ int main(){
 
     char respostaMENU[100];
     int i = 0;
+    char vazio[1000];
 
     struct Alunos Aluno[TAM];
     struct Professores Professor[TAM];
@@ -206,9 +207,22 @@ int main(){
                 i++;
 
                 if (i < TAM){
-                    strcpy(respostaMENU, "ALUNOS");
-                }
-                else{
+
+                    printf("Aperte a tecla 1 para adicionar\n");
+                    printf("mais um aluno ou 2 para voltar ao menu: ");
+                    ler_texto(respostaMENU, 100);
+
+                    if (strcmp("1", respostaMENU) == 0){
+
+                        strcpy(respostaMENU, "ALUNOS");
+
+                    } else if(strcmp("2", respostaMENU) == 0){
+
+                        strcpy(respostaMENU, "MENU");
+
+                    }
+                    
+                }else{
                     strcpy(respostaMENU, "MENU");
                 }
                 limpar_entrada();
