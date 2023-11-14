@@ -92,13 +92,13 @@ struct Professores
     char CPFProfessor[15];
     char NumerodeMatricula[11];
     char DatadeNascimentoProfessor[11];
-    char NomedaDisciplina[1000];
+
 };
 
 struct Disciplinas{
     char NomedaDisciplina[1000];
-    int codigodaDisciplina;
-    int Semestre;
+    char codigodaDisciplina[9];
+    char Semestre[9];
     char professor[1000];
 };
 
@@ -113,9 +113,10 @@ int main(){
     struct Professores Professor[TAM];
     struct Disciplinas Disciplina[TAM];
 
-    printf("  Lista de professores | Lista de alunos | Cadastrar professores | Cadastrar Alunos | Sair\n\n");
+    system("cls || clear");
+    printf(" Professores | Alunos | Disciplinas | Sair\n\n");
 
-    printf("Como deseja prosseguir? ");
+    printf("O que deseja cadastrar primeiro? ");
     ler_texto(respostaMENU, 100);
     system("cls || clear");
 
@@ -123,16 +124,14 @@ int main(){
 
     while (strcmp("SAIR", respostaMENU) != 0){
 
-        if (strcmp("CADASTRAR ALUNOS", respostaMENU) == 0){
+        if (strcmp("ALUNOS", respostaMENU) == 0){
 
             do{
 
                 printf("CADASTRO DE ALUNOS\n\n");
 
-
                 printf("NOME COMPLETO: ");
                 ler_texto(Aluno[i].NomeAluno, 1000);
-
 
                 while (!letras(Aluno[i].NomeAluno)){
 
@@ -207,16 +206,16 @@ int main(){
                 i++;
 
                 if (i < TAM){
-                    strcpy(respostaMENU, "CADASTRAR ALUNOS");
+                    strcpy(respostaMENU, "ALUNOS");
                 }
                 else{
                     strcpy(respostaMENU, "MENU");
                 }
                 limpar_entrada();
 
-            } while (strcmp("CADASTRAR ALUNOS", respostaMENU) == 0);
+            } while (strcmp("ALUNOS", respostaMENU) == 0);
 
-        }else if (strcmp("CADASTRAR PROFESSORES", respostaMENU) == 0) {
+        }else if (strcmp("PROFESSORES", respostaMENU) == 0) {
 
             do{
 
@@ -279,22 +278,71 @@ int main(){
                     printf("Número de matrícula: ");
                     ler_texto(Professor[i].NumerodeMatricula, 11);
                 }
-
-                printf("DISCIPLINA: ");
-                ler_texto(Professor[i].NomedaDisciplina, 1000);
-
-                printf("SEMESTRE: ");
-                scanf("%d", &Disciplina[i].Semestre);
                 i++;
 
                 if (i < TAM){
-                    strcpy(respostaMENU, "CADASTRAR PROFESSORES");
+                    strcpy(respostaMENU, "PROFESSORES");
                 
                 }else{
                     strcpy(respostaMENU, "MENU");
                 }
 
-            } while (strcmp("CADASTRAR PROFESSORES", respostaMENU) == 0);
+            } while (strcmp("PROFESSORES", respostaMENU) == 0);
+
+        }else if(strcmp("DISCIPLINAS", respostaMENU) == 0){
+
+            do{
+
+                printf("CADASTRO DE DISCIPLINAS\n\n");
+
+                printf("DISCIPLINA: ");
+                ler_texto(Disciplina[i].NomedaDisciplina, 1000);
+                
+                while (!letras(Disciplina[i].NomedaDisciplina)){
+
+                    system("cls || clear");
+                    printf("Digite apenas letras e sem acentuação.\n");
+                    sleep(2);
+                    system("cls || clear");
+                    printf("DISCIPLINA: ");
+                    ler_texto(Disciplina[i].NomedaDisciplina, 1000);
+                }
+                maiusculo(Disciplina[i].NomedaDisciplina);
+
+                printf("SEMESTRE: ");
+                ler_texto(Disciplina[i].Semestre, 9);
+
+                printf("CÓDIGO: ");
+                ler_texto(Disciplina[i].codigodaDisciplina, 9);
+
+                printf("PROFESSOR: ");
+                ler_texto(Disciplina[i].professor, 1000);
+                maiusculo(Disciplina[i].professor);
+
+                int j;
+                for (j = 0; j < TAM; j++){ 
+
+                    if (strcmp(Disciplina[i].professor, Professor[j].NomeProfessor) != 0) {
+
+                        system("cls || clear");
+                        printf("PROFESSOR NÃO CADASTRADO!");
+                        sleep(2);
+                        system("cls || clear");
+                        printf("PROFESSOR: ");
+                        ler_texto(Disciplina[i].professor, 1000);
+                    }
+                    
+                }
+                i++;
+
+                if (i < TAM){
+                    strcpy(respostaMENU, "DISCIPLINAS");
+                
+                }else{
+                    strcpy(respostaMENU, "MENU");
+                }
+
+            } while (strcmp("DISCIPLINAS", respostaMENU) == 0);
 
         }else if(strcmp("MENU", respostaMENU) == 0){
 
@@ -310,7 +358,7 @@ int main(){
 
             }while(strcmp("MENU", respostaMENU) == 0);
 
-        }else{
+        } else{
 
             printf("Não entendi o que você quis dizer :(");
             sleep(3);
@@ -320,5 +368,40 @@ int main(){
         }
 
     }
+
+       /*/ }else if(strcmp("ALUNOS", respostaMENU) == 0){
+
+            printf("LISTA DE ALUNOS CADASTRADOS\n\n");
+
+            for (i = 0; i < TAM; i++){
+
+                printf("Nome completo: %s\n", Aluno[i].NomeAluno);
+                printf("Data de nascimento: %s\n", Aluno[i].DatadeNascimentoAluno);
+                printf("CPF: %s\n", Aluno[i].CPFAluno);
+                printf("Sexo: %s\n", Aluno[i].SexoAluno);
+            }
+
+        }else if(strcmp("PROFESSORES", respostaMENU) == 0){
+
+            printf("LISTA DE PROFESSORES CADASTRADOS\n\n");
+
+            for (i = 0; i < TAM; i++){
+
+                printf("Nome completo: %s\n", Professor[i].NomeProfessor);
+                printf("Data de nascimento: %s\n", Professor[i].DatadeNascimentoProfessor);
+                printf("CPF: %s\n", Professor[i].CPFProfessor);
+                printf("Sexo: %s\n", Professor[i].SexoProfessor);
+            }
+            
+        }else{
+
+            printf("Não entendi o que você quis dizer :(");
+            sleep(3);
+            system("cls || clear");
+            strcpy(respostaMENU, "MENU");
+
+        }
+
+    }*/
     return 0;
 }
