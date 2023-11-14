@@ -98,7 +98,7 @@ struct Professores
 struct Disciplinas{
     char NomedaDisciplina[1000];
     char codigodaDisciplina[9];
-    char Semestre[9];
+    char Semestre;
     char professor[1000];
 };
 
@@ -310,8 +310,21 @@ int main(){
                 maiusculo(Disciplina[i].NomedaDisciplina);
 
                 printf("SEMESTRE: ");
-                ler_texto(Disciplina[i].Semestre, 9);
+                scanf("%c", &Disciplina[i].Semestre);
 
+                while (!isdigit(Disciplina[i].Semestre) || Disciplina[i].Semestre > '4'){
+
+                    limpar_entrada();
+                    system("cls || clear");
+                    printf("inválido! Digite de 1 a 4.\n");
+                    sleep(2);
+                    system("cls || clear");
+                    printf("SEMESTRE: ");
+                    scanf("%c", &Disciplina[i].Semestre);
+
+                }
+                
+                limpar_entrada();
                 printf("CÓDIGO: ");
                 ler_texto(Disciplina[i].codigodaDisciplina, 9);
 
@@ -369,9 +382,22 @@ int main(){
 
     }
 
-       /*/ }else if(strcmp("ALUNOS", respostaMENU) == 0){
+    printf("1. Alunos ordenados por nome                       5. Professores ordenados por nome\n");
+    printf("2. Alunos ordenados por sexo                       6. Professores ordenados por sexo\n");
+    printf("3. Alunos por ordem de cadastro                    7. Professores por ordem de cadastro\n");
+    printf("4. Alunos ordenados por data de nascimento         8. Professores ordenados por data de nascimento\n\n");
 
-            printf("LISTA DE ALUNOS CADASTRADOS\n\n");
+    printf("Que lista vocẽ deseja verificar? ");
+    ler_texto(respostaMENU, 100);
+    system("cls || clear");
+
+    maiusculo(respostaMENU);
+
+    while (strcmp("SAIR", respostaMENU) != 0){
+
+        if(strcmp("ALUNOS ORDENADOS POR ORDEM DE CADASTRO", respostaMENU) == 0 || strcmp("3", respostaMENU) == 0){
+
+            printf("LISTA DE ALUNOS POR ORDEM DE CADASTRO\n\n");
 
             for (i = 0; i < TAM; i++){
 
@@ -381,9 +407,9 @@ int main(){
                 printf("Sexo: %s\n", Aluno[i].SexoAluno);
             }
 
-        }else if(strcmp("PROFESSORES", respostaMENU) == 0){
+        } else if(strcmp("PROFESSORES ORDENADOS POR ORDEM DE CADASTRO", respostaMENU) == 0 || strcmp("7", respostaMENU) == 0){
 
-            printf("LISTA DE PROFESSORES CADASTRADOS\n\n");
+            printf("LISTA DE PROFESSORES POR ORDEM DE CADASTRO\n\n");
 
             for (i = 0; i < TAM; i++){
 
@@ -392,7 +418,7 @@ int main(){
                 printf("CPF: %s\n", Professor[i].CPFProfessor);
                 printf("Sexo: %s\n", Professor[i].SexoProfessor);
             }
-            
+
         }else{
 
             printf("Não entendi o que você quis dizer :(");
@@ -402,6 +428,6 @@ int main(){
 
         }
 
-    }*/
+    }
     return 0;
 }
