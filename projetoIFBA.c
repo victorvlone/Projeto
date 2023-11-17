@@ -375,12 +375,13 @@ int main(){
 
             do{
 
-                printf("  Lista de professores | Lista de alunos | Cadastrar professores | Cadastrar Alunos | Sair\n\n");
-                printf("Como deseja prosseguir? ");
-                ler_texto(respostaMENU, 100);
                 system("cls || clear");
+                printf(" Professores | Alunos | Disciplinas | Sair\n\n");
 
+                printf("O que deseja cadastrar primeiro? ");
+                ler_texto(respostaMENU, 100);
                 maiusculo(respostaMENU);
+                system("cls || clear");
 
             }while(strcmp("MENU", respostaMENU) == 0);
 
