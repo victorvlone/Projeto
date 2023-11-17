@@ -375,7 +375,6 @@ int main(){
 
             do{
 
-                limpar_entrada();
                 printf("  Lista de professores | Lista de alunos | Cadastrar professores | Cadastrar Alunos | Sair\n\n");
                 printf("Como deseja prosseguir? ");
                 ler_texto(respostaMENU, 100);
