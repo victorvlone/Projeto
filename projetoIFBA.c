@@ -383,8 +383,6 @@ int main(){
 
             }else if(strcmp("MENU", respostaMENU) == 0){
 
-                do{
-
                     printf("1. Cadastros\n");
                     printf("2. Listas\n");
                     printf("3. Sair\n\n");
@@ -392,7 +390,7 @@ int main(){
                     ler_texto(respostaInicial, 100);
                     maiusculo(respostaInicial);
 
-                }while(strcmp("MENU", respostaMENU) == 0);
+                    strcpy(respostaMENU, "SAIR");
 
             } else{
 
