@@ -422,28 +422,27 @@ int main(){
 
             if(strcmp("ALUNOS ORDENADOS POR SEXO", respostaMENU) == 0 || strcmp("2", respostaMENU) == 0){
 
-                printf("LISTA DE ALUNOS POR SEXO\n\n");
-
                 printf("MASCULINO:\n\n");
 
                 for (i = 0; i < TAM; i++){
 
                     if (strcmp("MASCULINO", Aluno[i].SexoAluno) == 0){
-                        printf("%s\n", Aluno[i].NomeAluno);
+                        printf("%d. %s\n", i+1, Aluno[i].NomeAluno);
                     }
                     
                 }
 
-                printf("FEMININO:\n\n");
+                printf("\nFEMININO:\n\n");
 
                 for (i = 0; i < TAM; i++){
 
                     if (strcmp("FEMININO", Aluno[i].SexoAluno) == 0){
-                        printf("%s\n", Aluno[i].NomeAluno);
+                        printf("%d. %s\n", i+1, Aluno[i].NomeAluno);
                     }
                     
                 }
 
+                getchar();
                 strcpy(respostaMENU, "SAIR");
 
             } else if(strcmp("ALUNOS ORDENADOS POR ORDEM DE CADASTRO", respostaMENU) == 0 || strcmp("3", respostaMENU) == 0){
@@ -472,6 +471,9 @@ int main(){
                     printf("CPF: %s\n", Professor[i].CPFProfessor);
                     printf("Sexo: %s\n", Professor[i].SexoProfessor);
                 }
+
+                getchar();
+                strcpy(respostaMENU, "SAIR");
 
             }else{
 
