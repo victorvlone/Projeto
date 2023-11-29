@@ -6,6 +6,10 @@
 #include <time.h>
 #define TAM 2
 
+int OrdenacaodeNomes(const void *a, const void *b){
+    return strcmp(*(const char **)a, *(const char **)b);
+}
+
 int verificacaoData(const char *data){
     int i;
     for (i = 0; i < 10; i++){
@@ -420,7 +424,24 @@ int main(){
 
         while (strcmp("SAIR", respostaMENU) != 0){
 
-            if(strcmp("ALUNOS ORDENADOS POR SEXO", respostaMENU) == 0 || strcmp("2", respostaMENU) == 0){
+            if (strcmp("ALUNOS ORDENADOS POR NOME", respostaMENU) == 0 || strcmp("1", respostaMENU) == 0){
+
+                const char *NomesAlunos[TAM];
+
+                for (i = 0; i < TAM; i++){
+                    NomesAlunos[i] = Aluno[i].NomeAluno;
+                }       
+
+                qsort(NomesAlunos, TAM, sizeof(char *), OrdenacaodeNomes);
+
+                for (i = 0; i < TAM; i++){
+                    printf("%d. %s\n", i+1, NomesAlunos[i]);
+                }
+
+                getchar();
+                strcpy(respostaMENU, "SAIR");
+                    
+            } else if(strcmp("ALUNOS ORDENADOS POR SEXO", respostaMENU) == 0 || strcmp("2", respostaMENU) == 0){
 
                 printf("MASCULINO:\n\n");
 
